@@ -1,7 +1,9 @@
-<?php 
-include ("dbconn.php");
-print '
+<?php
+ session_start();
+ include("dbconn.php");
+ $connection = connect();
 
+?>
 <!DOCTYPE html>
 <html>
  <head>
@@ -30,8 +32,8 @@ print '
         <ul>
       </nav>
   </header>';
-  <main>';
-		
+  <main>
+  <?php
 
 	if (!isset($_GET['menu']) || $_GET['menu'] == 1) { include("index.php"); }
 	
@@ -44,11 +46,11 @@ print '
 
 	else if ($_GET['menu'] == 4) { include("about.php"); }
 
-  else if ($_GET['menu'] == 2) { include("gallery.php"); }
+  else if ($_GET['menu'] == 5) { include("gallery.php"); }
 
-  else if ($_GET['menu'] == 2) { include("clanstvo.php"); }
+  else if ($_GET['menu'] == 6) { include("clanstvo.php"); }
 	
-	print '
+  ?>
 	</main>
 
     <footer class="footer-distributed">';
@@ -77,7 +79,7 @@ print '
 
 					
 				</p>
-
+        <?php
         if (!isset($_GET['menu']) || $_GET['menu'] == 1) { include("index.php"); }
 	
 
@@ -93,12 +95,12 @@ print '
       
         else if ($_GET['menu'] == 2) { include("clanstvo.php"); }
 
-				<p>Gladiator gym &copy; 2021 Dominik Jozinović </p>
+			
+      ?>
+      		<p>Gladiator gym &copy; 2021 Dominik Jozinović </p>
 			</div>
-
 		</footer>
 </body>
 
-</html>';
+</html>
 
-?>
