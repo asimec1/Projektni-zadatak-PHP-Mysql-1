@@ -1,6 +1,19 @@
 <?php 
+
 include ("dbconn.php");
-?>
+
+
+	
+# Variables MUST BE INTEGERS
+  if(isset($_GET['menu'])) { $menu   = (int)$_GET['menu']; }
+if(isset($_GET['action'])) { $action   = (int)$_GET['action']; }
+
+# Variables MUST BE STRINGS A-Z
+  if(!isset($_POST['_action_']))  { $_POST['_action_'] = FALSE;  }
+
+if (!isset($menu)) { $menu = 1; }
+
+print '
 
 <!DOCTYPE html>
 <html>
@@ -39,33 +52,39 @@ include ("dbconn.php");
            <li>
              <a href="clanstvo.php?menu=7">👑Arena</a>
             </li>
-          
+            
         </ul>
+        
         <div class="burgermenu">
         <div class="line1"></div>
         <div class="line2"></div>
         <div class="line3"></div>
         </div>
-      </nav>
+      </nav>';
 
-      <?php
+   
+		if (isset($_SESSION['message'])) {
+			print $_SESSION['message'];
+			unset($_SESSION['message']);
+		}   
+  
 
-if (!isset($_GET['menu']) || $_GET['menu'] == 1) { include("index.php"); }
+if (!isset($_GET[$menu]) || $_GET[$menu] == 1) { include("index.php"); }
 
-else if ($_GET['menu'] == 2) { include("trenirajkao.php"); }
-else if ($_GET['menu'] == 3) { include("news.php"); }
-
-
-else if ($_GET['menu'] == 4) { include("contact.php"); }
+else if ($_GET[$menu] == 2) { include("trenirajkao.php"); }
+else if ($_GET[$menu] == 3) { include("news.php"); }
 
 
-else if ($_GET['menu'] == 5) { include("about.php"); }
+else if ($_GET[$menu] == 4) { include("contact.php"); }
 
-else if ($_GET['menu'] == 6) { include("gallery.php"); }
 
-else if ($_GET['menu'] == 7) { include("clanstvo.php"); }
+else if ($_GET[$menu] == 5) { include("about.php"); }
 
-?>
+else if ($_GET[$menu] == 6) { include("gallery.php"); }
+
+else if ($_GET[$menu] == 7) { include("clanstvo.php"); }
+
+print '
       <script src="app.js"></script>
       
 
@@ -76,7 +95,7 @@ else if ($_GET['menu'] == 7) { include("clanstvo.php"); }
          
           <h1>Welcome to the Arena</h1>
           <h2>Od najjačih za najjače</h2>
-         <span class="gumb"> <a href ="clanstvo.html"></a></div></span>
+         <span class="gumb"> <a href ="clanstvo.php"></a></div></span>
         </div>
         
       
@@ -106,26 +125,26 @@ else if ($_GET['menu'] == 7) { include("clanstvo.php"); }
             <a href="clanstvo.php?menu=7">👑Arena</a>
   
             
-          </p>
-          <?php
+          </p>';
 
-if (!isset($_GET['menu']) || $_GET['menu'] == 1) { include("index.php"); }
-
-else if ($_GET['menu'] == 2) { include("trenirajkao.php"); }
-else if ($_GET['menu'] == 3) { include("news.php"); }
-
-
-else if ($_GET['menu'] == 4) { include("contact.php"); }
-
-
-else if ($_GET['menu'] == 5) { include("about.php"); }
-
-else if ($_GET['menu'] == 6) { include("gallery.php"); }
-
-else if ($_GET['menu'] == 7) { include("clanstvo.php"); }
-
-?>
           
+          if (!isset($_GET[$menu]) || $_GET[$menu] == 1) { include("index.php"); }
+
+          else if ($_GET[$menu] == 2) { include("trenirajkao.php"); }
+          else if ($_GET[$menu] == 3) { include("news.php"); }
+          
+          
+          else if ($_GET[$menu] == 4) { include("contact.php"); }
+          
+          
+          else if ($_GET[$menu] == 5) { include("about.php"); }
+          
+          else if ($_GET[$menu] == 6) { include("gallery.php"); }
+          
+          else if ($_GET[$menu] == 7) { include("clanstvo.php"); }
+          
+          
+          print '
           <p>Gladiator gym &copy; 2021 Dominik Jozinović </p>
         </div>
   
@@ -139,4 +158,5 @@ else if ($_GET['menu'] == 7) { include("clanstvo.php"); }
       </body>
      
     
-</html>
+</html>';
+?>
