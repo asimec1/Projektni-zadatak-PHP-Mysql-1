@@ -1,1 +1,1 @@
-# Projektni-zadatak-PHP-Mysql
+NTPWS-projektni zadatak
