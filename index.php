@@ -1,105 +1,74 @@
 <?php 
 
-include ("dbconn.php");
-
+	
 
 	
-# Variables MUST BE INTEGERS
-  if(isset($_GET['menu'])) { $menu   = (int)$_GET['menu']; }
-if(isset($_GET['action'])) { $action   = (int)$_GET['action']; }
+	# Database connection
+	include ("dbconn.php");
 
-# Variables MUST BE STRINGS A-Z
-  if(!isset($_POST['_action_']))  { $_POST['_action_'] = FALSE;  }
+    if(isset($_GET['menu'])) { $menu   = (int)$_GET['menu']; }
+	if(isset($_GET['action'])) { $action   = (int)$_GET['action']; }
+	
+	
+    if(!isset($_POST['_action_']))  { $_POST['_action_'] = FALSE;  }
+	
+	if (!isset($menu)) { $menu = 1; }
+	
 
-if (!isset($menu)) { $menu = 1; }
-
+	
 print '
 
 <!DOCTYPE html>
 <html>
  <head>
    
-  <meta charset="UTF-8">
+ <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet"  href="style.css">
+  
   <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
   <title>⚔️GLADIATORGYM⚔️</title>
  </head>
  
 <body>
  
-  <nav>
-     <div class="logo">
-          <h4 ><a href="index.php?menu=1"style="color: inherit;">⚔️GLADIATORgym⚔️</a></h4>
-        </div>
-        <ul class="nav-links" >
-          <li>
-            <a href="trenirajkao.php?menu=2">💪Treniraj kao gladiator</a>
-          </li>
-           <li>
-             <a href="news.php?menu=3">📰Novosti</a>
-            </li>
-           <li>
-             <a href="contact.php?menu=4">☎️Kontakt</a>
-            </li>
-            <li>
-              <a href="about.php?menu=5">💡O nama</a>
-            </li>
-           <li>
-             <a href="gallery.php?menu=6">🖼️Galerija teretane</a>
-            </li>
-           <li>
-             <a href="clanstvo.php?menu=7">👑Arena</a>
-            </li>
-            
-        </ul>
-        
-        <div class="burgermenu">
-        <div class="line1"></div>
-        <div class="line2"></div>
-        <div class="line3"></div>
-        </div>
-      </nav>';
-
+  <nav>';
    
-		if (isset($_SESSION['message'])) {
-			print $_SESSION['message'];
-			unset($_SESSION['message']);
-		}   
+
+ 
   
+  include("menu.php");
+        
+  print '
+</nav>
 
-if (!isset($_GET[$menu]) || $_GET[$menu] == 1) { include("index.php"); }
-
-else if ($_GET[$menu] == 2) { include("trenirajkao.php"); }
-else if ($_GET[$menu] == 3) { include("news.php"); }
+<script src="app.js"></script>
+<main>';
 
 
-else if ($_GET[$menu] == 4) { include("contact.php"); }
 
+if (!isset($menu) || $menu == 1) { include("home.php");}
 
-else if ($_GET[$menu] == 5) { include("about.php"); }
+# News
+else if ($menu == 2) { include("trenirajkao.php"); }
 
-else if ($_GET[$menu] == 6) { include("gallery.php"); }
+# Contact
+else if ($menu == 3) { include("news.php"); }
 
-else if ($_GET[$menu] == 7) { include("clanstvo.php"); }
+# About us
+else if ($menu == 4) { include("contact.php"); }
+
+# Register
+else if ($menu == 5) { include("about.php"); }
+
+# Signin
+else if ($menu == 6) { include("gallery.php"); }
+
+# Admin webpage
+else if ($menu == 7) { include("clanstvo.php"); }
 
 print '
-      <script src="app.js"></script>
-      
-
-      <main>
-        <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
-        <div class= "gladiatorgym"></div>
-        <div class = "banner">
-         
-          <h1>Welcome to the Arena</h1>
-          <h2>Od najjačih za najjače</h2>
-         <span class="gumb"> <a href ="clanstvo.php"></a></div></span>
-        </div>
-        
-      
-      </main>
       <footer class="footer-distributed">
         <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
         <div class="footer-right">
@@ -109,42 +78,12 @@ print '
   
         </div>
   
-        <div class="footer-left">
-  
-          <p class="footer-links">
-            <a class="link-1" href="trenirajkao.php?menu=2">💪Treniraj kao gladiator</a>
-  
-            <a href="news.php?menu=3">📰Novosti</a>
-  
-            <a href="contact.php?menu=4">☎️Kontakt</a>
-  
-            <a href="about.php?menu=5">💡O nama</a>
-            
-            <a href="gallery.php?menu=6">🖼️Galerija teretane</a>
+        <div class="footer-left">';
+     
+        include("footer.php");
 
-            <a href="clanstvo.php?menu=7">👑Arena</a>
-  
-            
-          </p>';
+        print '
 
-          
-          if (!isset($_GET[$menu]) || $_GET[$menu] == 1) { include("index.php"); }
-
-          else if ($_GET[$menu] == 2) { include("trenirajkao.php"); }
-          else if ($_GET[$menu] == 3) { include("news.php"); }
-          
-          
-          else if ($_GET[$menu] == 4) { include("contact.php"); }
-          
-          
-          else if ($_GET[$menu] == 5) { include("about.php"); }
-          
-          else if ($_GET[$menu] == 6) { include("gallery.php"); }
-          
-          else if ($_GET[$menu] == 7) { include("clanstvo.php"); }
-          
-          
-          print '
           <p>Gladiator gym &copy; 2021 Dominik Jozinović </p>
         </div>
   
